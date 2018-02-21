@@ -7,7 +7,7 @@
 
 namespace nullref\datatable;
 
-
+use Yii;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -247,6 +247,10 @@ class DataTable extends Widget
      * @var array Html options for table
      */
     public $tableOptions = [];
+    /**
+     * @var array Allows you to specify exactly where in the DOM you want DataTables to inject the various controls
+     */
+    public $sDom;
 
     public function init()
     {
@@ -258,10 +262,14 @@ class DataTable extends Widget
     public function run()
     {
         $id = isset($this->id) ? $this->id : $this->getId();
-        echo Html::beginTag('table', ArrayHelper::merge(['id' => $id], $this->tableOptions));
+        $params = $this->getParams();
 
+            $params_json = Json::encode($params);
+        
+        echo Html::beginTag('table', ArrayHelper::merge(['id' => $id], $this->tableOptions));
+        
         echo Html::endTag('table');
-        $this->view->registerJs('jQuery("#' . $id . '").DataTable(' . Json::encode($this->getParams()) . ');');
+        $this->view->registerJs('jQuery("#' . $id . '").DataTable(' . $params_json . ');');
     }
 
     protected function getParams()
@@ -290,6 +298,7 @@ class DataTable extends Widget
             'serverSide',
             'stateSave',
             'language',
+            'sDom',
         ];
         $result = [];
         foreach ($features as $attribute) {
@@ -323,7 +332,8 @@ class DataTable extends Widget
             'searchDelay',
             'stateDuration',
             'stripeClasses',
-            'tabIndex'
+            'tabIndex',
+            'columnDefs'
         ];
         $result = [];
         foreach ($options as $attribute) {
