@@ -1,5 +1,5 @@
 {
-    "name": "nullref/yii2-datatables",
+    "name": "specifi/yii2-datatables",
     "description": "Yii2 Extension for DataTables jQuery plug-in",
     "type": "yii2-extension",
     "homepage": "https://github.com/NullRefExcep/yii2-datatables",
@@ -21,6 +21,10 @@
         {
             "name": "Dmytro Karpovych",
             "email": "ZAYEC77@gmail.com"
+        },
+        {
+            "name": "Zhmayev Yaroslav",
+            "email": "salaros@yandex.ru"
         }
     ],
     "minimum-stability": "stable",
